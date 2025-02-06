@@ -12,11 +12,23 @@
             box-sizing: border-box;
         }
 
-        body {
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
+        }
+
+        body {
             background: white;
+            color: #333;
             transition: background 0.3s, color 0.3s;
         }
 
@@ -30,15 +42,24 @@
             color: white;
             text-align: center;
             padding: 2rem 0;
+            position: relative;
         }
 
         #dark-mode-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
             background: #ff9800;
             border: none;
-            color: white;
-            padding: 0.5rem 1rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            margin-top: 10px;
+            font-size: 1.2rem;
+            color: white;
         }
 
         nav {
@@ -51,40 +72,79 @@
             color: white;
             text-decoration: none;
             margin: 0 1rem;
+            font-size: 1.1rem;
         }
 
         .container {
             max-width: 1100px;
             margin: auto;
-            padding: 0 2rem;
+            padding: 2rem;
         }
 
-        section {
+        .profile {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .profile img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .profile h1 {
+            margin-top: 1rem;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
             padding: 3rem 0;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .visible {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .project-card {
-            border: 1px solid #ddd;
+            background: #f4f4f4;
             padding: 1rem;
-            border-radius: 5px;
-            transition: transform 0.3s;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
 
         .project-card:hover {
             transform: scale(1.05);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
         }
 
         .contact-form {
             max-width: 600px;
             margin: auto;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 0.7rem;
+            margin-top: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #2c3e50;
+            color: white;
+            padding: 0.7rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: #2c3e50;
+            color: white;
+            margin-top: 2rem;
         }
     </style>
 </head>
@@ -92,30 +152,34 @@
     <header>
         <h1>Sonish Poudel</h1>
         <p>Web Developer | Designer | Creator</p>
-        <button id="dark-mode-toggle">Toggle Dark Mode</button>
+        <button id="dark-mode-toggle">🌙</button>
     </header>
+
+    <div class="profile">
+        <img src="profile.jpg" alt="Profile Picture">
+        <h1>Sonish Poudel</h1>
+        <p>Skilled in Web Development, UI/UX Design, and JavaScript Frameworks.</p>
+    </div>
 
     <nav>
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
     </nav>
 
     <main>
-        <section id="about" class="about">
-            <div class="container">
-                <h2>About Me</h2>
-                <p>Your professional introduction goes here.</p>
-            </div>
-        </section>
-
         <section id="projects">
             <div class="container">
                 <h2>My Projects</h2>
-                <div class="project-card">
-                    <h3>Project 1</h3>
-                    <p>Description of your first project.</p>
+                <div class="projects">
+                    <div class="project-card">
+                        <h3>Project 1</h3>
+                        <p>Interactive website design.</p>
+                    </div>
+                    <div class="project-card">
+                        <h3>Project 2</h3>
+                        <p>Full-stack web app.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -141,26 +205,6 @@
         document.getElementById('dark-mode-toggle').addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
         });
-
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        const sections = document.querySelectorAll('section');
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        });
-
-        sections.forEach(section => observer.observe(section));
     </script>
 </body>
 </html>
